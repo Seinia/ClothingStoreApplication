@@ -1,0 +1,136 @@
+.App {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll; /* Включает вертикальную прокрутку, но скрывает скроллбар */
+}
+.header {
+  background-color: #000;
+  color: #fff;
+  padding-top: 35px;
+  padding-bottom: 25px;
+  margin: 0px;
+  text-align: center;
+}
+
+.header a {
+  font-size: 54px;
+  font-weight: 700;
+  color: #fff; /* Белый цвет текста */
+  display: inline-block; /* Сделать элемент блочным для корректного отображения */
+  padding: 10px; /* Внутренний отступ */
+  border: 2px solid #fff; /* Белая граница */
+  border-radius: 4px; /* Скругление углов */
+  text-decoration: none; /* Убрать подчеркивание текста */
+}
+.categories {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.category {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add this line */
+  cursor: pointer;
+  position: relative; /* Add this line */
+  transition: background-color 0.8s; /* Add this line */
+}
+
+.category:hover {
+  background-color: rgba(0, 0, 0, 0.25); /* Add this line */
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px 0px;
+  padding: 0;
+  margin: 50px; /* Удалить это свойство */
+  justify-content: center;
+  justify-items: center; /* Add this line */
+}
+
+.product {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  width: 400px;
+  margin: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add this line */
+  position: relative; /* Add this line */
+  transition: background-color 0.8s; /* Add this line */
+}
+
+.product::before {
+  border-radius: 20px;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.product:hover::before {
+  opacity: 1;
+}
+
+.product:hover {
+  background-color: rgba(0, 0, 0, 0.25); /* Add this line */
+}
+
+.product .details-button {
+  font-size: 24px;
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  background-color: #ffffff;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0; /* Изначально кнопка невидима */
+  transition: opacity 0.3s; /* Добавляем плавный переход */
+}
+
+.product:hover .details-button {
+  opacity: 1; /* При наведении кнопка становится видимой */
+}
+
+.product img {
+  width: 60%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.product:hover img {
+  background-color: rgba(0, 0, 0, 0.25); /* Add this line */
+}
+
+.product h2 {
+  margin-top: 10px;
+}
+
+.product p {
+  margin-bottom: 10px;
+}
