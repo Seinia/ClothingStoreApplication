@@ -1,0 +1,124 @@
+.details-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-info-container {
+  position: absolute;
+  top: 440px;
+  left: 1300px;
+  transform: translateX(-50%); 
+  width: 400px;
+  padding-left: 20px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.product-info-container h1 {
+  margin-top: 0;
+}
+
+.title-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+.add-to-cart-button {
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.8s;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+}
+
+.add-to-cart-button:hover {
+  background-color: rgba(0, 0, 0, 0.25); 
+}
+
+.quantity-selector1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.8s;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+  width: 40px;
+}
+
+.quantity-selector2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.8s;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+  width: 40px;
+}
+
+.size-selector {
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.8s;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+  width: 40px;
+}
+
+.size-selector:hover {
+  background-color: rgba(0, 0, 0, 0.25); 
+}
+
+.size-selector.active {
+  background-color: rgba(0, 0, 0, 0.25); 
+}
+
+.quantity-selector1:hover,
+.quantity-selector2:hover {
+  background-color: rgba(0, 0, 0, 0.25); 
+}
+
+.product-info-price {
+  font-size: 28px; 
+  margin-bottom: 20px; 
+}
+
+.product-info-description {
+  font-size: 24px;
+  word-wrap: break-word; 
+  max-width: 95%; 
+}

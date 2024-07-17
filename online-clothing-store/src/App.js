@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Header from './Header';
-import Categories from './Categories';
-import Products from './Products';
+import Header from './Components/Header/Header';
+import Categories from './Components/Categories/Categories';
+import Products from './Components/Products/Products';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Details from './Components/ProductDetails/ProductDetails';
+import Category from './Components/Categories/Category';
 
 function App() {
   const [category, setCategory] = useState('headwear');
@@ -19,11 +22,17 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header />
-      <Categories onCategoryChange={handleCategoryChange} />
-      <Products products={products} />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Categories onCategoryChange={handleCategoryChange} />
+        <Routes>
+          <Route path="/" element={<Products products={products} />} />
+          <Route path="/product/:id" element={<Details />} />
+          <Route path="/category/:categoryName" element={<Category />} /> // Add this route
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

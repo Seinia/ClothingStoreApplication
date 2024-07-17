@@ -1,0 +1,101 @@
+.header {
+  background-color: #000;
+  color: #fff;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  margin: 0;
+  text-align: center;
+  position: relative; 
+}
+
+.header a {
+  font-size: 54px;
+  font-weight: 700;
+  color: #fff;
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.icons {
+  position: absolute;
+  top: 85%;
+  right: 50px;
+  transform: translateY(-50%);
+}
+
+.icon {
+  font-size: 24px;
+  color: #fff;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  opacity: 0.8;
+}
+
+.orders-list {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  width: 360px; 
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1; 
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease; 
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.orders-list.open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.orders-list .order-item {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.orders-list .empty-orders{
+  color: black;
+}
+
+.orders-list .product-image {
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.orders-list .product-details {
+  margin-top: 20px;
+  font-size: 14px;
+  color: black;
+  flex: 1;
+}
+
+.orders-list h2 {
+  margin: 0 0 10px;
+}
+
+.orders-list p {
+  margin: 0;
+  font-size: 18px;
+}

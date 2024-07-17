@@ -1,14 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './Products.css'
 
 function Products({ products }) {
   return (
     <div className="products">
       {products.map((product) => (
         <div key={product.id} className="product">
-          <img src={product.imageURL} alt={product.name} />
+          <img src={product.imagesURL?.[0]} alt={product.name} />
           <h2>{product.name}</h2>
           <p>Ціна: {product.price} грн.</p>
-          <button className="details-button">Докладніше</button>
+          <Link to={`/product/${product.id}`} className="details-button">Докладніше</Link>
         </div>
       ))}
     </div>

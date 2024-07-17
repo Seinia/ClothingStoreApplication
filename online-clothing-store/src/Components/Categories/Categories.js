@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './Categories.css'
 
 const categories = [
   { id: 1, name: 'Головні убори' },
@@ -6,21 +8,17 @@ const categories = [
   { id: 3, name: 'Штани' },
   { id: 4, name: 'Худі' },
   { id: 5, name: 'Сорочки' },
-  { id: 6, name: 'Взуття' },
-  { id: 7, name: 'Сувеніри' },
+  { id: 6, name: 'Шкарпетки' },
+  { id: 7, name: 'Аксесуари' },
 ];
 
-function Categories({ onCategoryChange }) {
+function Categories() {
   return (
     <div className="categories">
       {categories.map((category) => (
-        <div
-          key={category.id}
-          className="category"
-          onClick={() => onCategoryChange(category.name)}
-        >
+        <Link key={category.id} to={`/category/${category.name}`} className="category">
           {category.name}
-        </div>
+        </Link>
       ))}
     </div>
   );
