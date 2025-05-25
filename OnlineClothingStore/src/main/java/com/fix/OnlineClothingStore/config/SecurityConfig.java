@@ -53,8 +53,18 @@ public class SecurityConfig {
         http
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("api/v1/users/**", "api/v1/items/getItem", "api/v1/items/getItemsByCategory", "api/v1/items/getAllItems").permitAll()
-                        .requestMatchers("api/v1/items/postItem", "api/v1/users/logout").authenticated()
+                        .requestMatchers("api/v1/users/register",
+                                "api/v1/users/login",
+                                "api/v1/products/coffee/getItem",
+                                "api/v1/products/coffee/getAllItems",
+                                "api/v1/products/accessory/getItem",
+                                "api/v1/products/accessory/getAllItems"
+                        ).permitAll()
+                        .requestMatchers("api/v1/products/coffee/postItem",
+                                "api/v1/products/accessory/postItem",
+                                "api/v1/users/logout",
+                                "api/v1/orders/*"
+                        ).authenticated()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

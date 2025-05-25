@@ -1,7 +1,9 @@
 package com.fix.OnlineClothingStore.Model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Data
@@ -18,50 +20,8 @@ public class Token {
     @Column(name = "refresh_token")
     private String refreshToken;
 
-    @Column(name = "is_logged_out")
-    private boolean loggedOut;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String token) {
-        this.accessToken = token;
-    }
-
-    public boolean isLoggedOut() {
-        return loggedOut;
-    }
-
-    public void setLoggedOut(boolean loggedOut) {
-        this.loggedOut = loggedOut;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
 }

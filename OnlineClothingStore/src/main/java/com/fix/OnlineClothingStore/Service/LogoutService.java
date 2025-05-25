@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 @Configuration
@@ -26,12 +27,11 @@ public class LogoutService implements LogoutHandler {
         }
 
         String token = authHeader.substring(7);
-        Token storedToken = tokenRepository.findByAccessToken(token).orElse(null);
+        tokenRepository.findByAccessToken(token).ifPresent(t -> {
+            tokenRepository.deleteAllTokensByUser(t.getUser().getId());
+        });
 
-        if(storedToken != null) {
-            storedToken.setLoggedOut(true);
-            tokenRepository.save(storedToken);
-        }
+        SecurityContextHolder.clearContext();
     }
 
 }

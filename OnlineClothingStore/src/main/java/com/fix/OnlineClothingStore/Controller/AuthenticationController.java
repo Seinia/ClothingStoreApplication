@@ -1,8 +1,7 @@
 package com.fix.OnlineClothingStore.Controller;
 
 
-
-import com.fix.OnlineClothingStore.Model.AuthenticationResponse;
+import com.fix.OnlineClothingStore.Model.ResponseMessageEntity;
 import com.fix.OnlineClothingStore.Model.User;
 import com.fix.OnlineClothingStore.Repo.UserRepository;
 import com.fix.OnlineClothingStore.Service.AuthenticationService;
@@ -12,13 +11,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/users")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthenticationController {
 
     @Autowired
@@ -34,13 +31,13 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody User user) {
-        return ResponseEntity.ok(service.register(user));
+    public ResponseEntity<ResponseMessageEntity> register(@RequestBody User user) {
+        return service.register(user);
     }
 
     @PostMapping("login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody User user) {
-        return ResponseEntity.ok(service.authenticate(user));
+    public ResponseEntity login(@RequestBody User user) {
+        return service.authenticate(user);
     }
 
     @PostMapping("refresh-token")

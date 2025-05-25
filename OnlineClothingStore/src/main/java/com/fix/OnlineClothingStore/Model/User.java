@@ -14,7 +14,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private String roles;
+    private String roles = "USER";
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;

@@ -2,6 +2,11 @@ package com.fix.OnlineClothingStore.filter;
 
 
 
+import com.fix.OnlineClothingStore.Model.MyUserDetails;
+import com.fix.OnlineClothingStore.Model.Token;
+import com.fix.OnlineClothingStore.Model.User;
+import com.fix.OnlineClothingStore.Repo.TokenRepository;
+import com.fix.OnlineClothingStore.Repo.UserRepository;
 import com.fix.OnlineClothingStore.Service.JwtService;
 import com.fix.OnlineClothingStore.Service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
@@ -35,18 +40,33 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = null;
         String userName = null;
 
-        if(authHeader != null && authHeader.startsWith("Bearer ")){
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
             userName = jwtService.extractUsername(token);
         }
 
-        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = context.getBean(MyUserDetailsService.class).loadUserByUsername(userName);
+        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            User user = context.getBean(UserRepository.class).findByUsername(userName).orElse(null);
 
-            if (jwtService.validateToken(token, userDetails)){
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            if (user != null) {
+                Token storedToken = context.getBean(TokenRepository.class).findByUserId(user.getId()).orElse(null);
+
+                if (storedToken != null) {
+                    if (jwtService.isTokenExpired(token) && jwtService.isValidRefreshToken(storedToken.getRefreshToken(), user)) {
+                        String newAccessToken = jwtService.generateAccessToken(user);
+                        storedToken.setAccessToken(newAccessToken);
+                        context.getBean(TokenRepository.class).save(storedToken);
+
+                        response.setHeader("Authorization", "Bearer " + newAccessToken);
+                    }
+
+                    if (jwtService.validateToken(token, new MyUserDetails(user))) {
+                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                                new MyUserDetails(user), null, new MyUserDetails(user).getAuthorities());
+                        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    }
+                }
             }
         }
         filterChain.doFilter(request, response);
